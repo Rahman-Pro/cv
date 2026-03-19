@@ -1,15 +1,9 @@
-// PASSWORD: hire-atiqur-2025
-const PASSWORD_HASH = "a0f3285b2297e8e6e5bce29e18e82152caa713e1cf4834a9eeb1a7bbc7e8a8d5";
+// ============================================
+// PASSWORD PROTECTION
+// ============================================
+const CORRECT_PASSWORD = "hire-atiqur-2025";
 
-async function hashPassword(password) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-async function checkPassword() {
+function checkPassword() {
     const input = document.getElementById('password-input');
     const errorMsg = document.getElementById('error-msg');
     const password = input.value.trim();
@@ -20,14 +14,14 @@ async function checkPassword() {
         return;
     }
 
-    const hashedInput = await hashPassword(password);
-
-    if (hashedInput === PASSWORD_HASH) {
+    if (password === CORRECT_PASSWORD) {
+        // ✅ Correct - Show CV
         document.getElementById('password-screen').style.display = 'none';
         document.getElementById('cv-content').style.display = 'block';
         sessionStorage.setItem('cv_unlocked', 'true');
         window.scrollTo(0, 0);
     } else {
+        // ❌ Wrong
         errorMsg.textContent = '❌ Incorrect password. Try again.';
         input.value = '';
         input.focus();
@@ -51,6 +45,7 @@ shakeStyle.textContent = `
 `;
 document.head.appendChild(shakeStyle);
 
+// Check session on load
 window.addEventListener('DOMContentLoaded', () => {
     if (sessionStorage.getItem('cv_unlocked') === 'true') {
         document.getElementById('password-screen').style.display = 'none';
@@ -60,14 +55,18 @@ window.addEventListener('DOMContentLoaded', () => {
     if (input) input.focus();
 });
 
-// PRINT
+// ============================================
+// PRINT FUNCTION
+// ============================================
 function handlePrint() {
     closeFAB();
     showToast('🖨️', 'Opening print dialog...');
     setTimeout(() => { window.print(); }, 500);
 }
 
+// ============================================
 // PDF DOWNLOAD
+// ============================================
 function handleDownloadPDF() {
     closeFAB();
     showToast('⏳', 'Generating PDF... Please wait');
@@ -110,7 +109,9 @@ function handleDownloadPDF() {
         });
 }
 
+// ============================================
 // COPY LINK
+// ============================================
 function handleCopyLink() {
     closeFAB();
     const url = window.location.href;
@@ -140,7 +141,9 @@ function fallbackCopy(text) {
     document.body.removeChild(textarea);
 }
 
-// TOAST
+// ============================================
+// TOAST NOTIFICATION
+// ============================================
 function showToast(icon, message) {
     const toast = document.getElementById('toast');
     const toastIcon = document.getElementById('toast-icon');
@@ -151,7 +154,9 @@ function showToast(icon, message) {
     setTimeout(() => { toast.classList.remove('show'); }, 3000);
 }
 
+// ============================================
 // FAB MENU
+// ============================================
 function toggleFAB() {
     const fabMain = document.getElementById('fab-main');
     const fabMenu = document.getElementById('fab-menu');
