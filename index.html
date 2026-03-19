@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atiqur Rahman | QA Automation Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div id="password-screen" class="password-screen">
+    <div class="password-box">
+        <div class="lock-icon">🔒</div>
+        <h2>Protected CV</h2>
+        <p>Enter access code to view</p>
+        <input type="password" id="password-input" placeholder="Enter password..." onkeypress="if(event.key==='Enter') checkPassword()">
+        <button onclick="checkPassword()">View CV →</button>
+        <div id="error-msg" class="error-msg"></div>
+        <div class="password-footer">
+            <small>🔐 This CV is password protected for privacy</small>
+        </div>
+    </div>
+</div>
+
+<!-- CV CONTENT -->
+<div id="cv-content" class="cv-content" style="display: none;">
+
+    <!-- Navigation -->
+    <nav class="navbar no-print">
+        <div class="nav-container">
+            <span class="nav-logo">AR</span>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button onclick="handlePrint()" class="nav-btn-icon" title="Print CV">🖨️</button>
+                <button onclick="handleDownloadPDF()" class="nav-btn-icon" title="Download PDF">📄</button>
+                <button onclick="handleCopyLink()" class="nav-btn-icon" title="Copy Link">🔗</button>
+                <a href="#contact" class="nav-btn">📩 Hire Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container no-print" id="fab-container">
+        <button class="fab-main" onclick="toggleFAB()" id="fab-main">📥</button>
+        <div class="fab-menu" id="fab-menu">
+            <button class="fab-item" onclick="handlePrint()">
+                <span class="fab-icon">🖨️</span>
+                <span class="fab-label">Print CV</span>
+            </button>
+            <button class="fab-item" onclick="handleDownloadPDF()">
+                <span class="fab-icon">📄</span>
+                <span class="fab-label">Save PDF</span>
+            </button>
+            <button class="fab-item" onclick="handleCopyLink()">
+                <span class="fab-icon">🔗</span>
+                <span class="fab-label">Copy Link</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-icon">✅</span>
+        <span id="toast-message">Link copied!</span>
+    </div>
+
+    <!-- Printable CV Area -->
+    <div id="printable-cv">
+
+        <!-- HEADER -->
+        <section id="about" class="header-section">
+            <div class="container">
+                <div class="profile-photo">
+                    <div class="photo-placeholder">AR</div>
+                </div>
+                <h1 class="name">Atiqur Rahman</h1>
+                <div class="title-badge">🧪 QA Automation Engineer</div>
+                <p class="tagline">Building Reliable Software Through Smart Automation</p>
+                <div class="header-info">
+                    <span>📍 Dhaka, Bangladesh</span>
+                    <a href="mailto:rahman.arpro@gmail.com">📧 rahman.arpro@gmail.com</a>
+                    <a href="https://github.com/Rahman-Pro" target="_blank">💻 GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUMMARY -->
+        <section class="section">
+            <div class="container">
+                <div class="summary-card">
+                    <h2 class="section-title">Professional Summary</h2>
+                    <p class="summary-text">Results-driven QA Automation Engineer helping companies deliver bug-free software by building intelligent test automation frameworks that catch issues before users do. Proven ability to reduce manual testing effort by 80% through smart automation, CI/CD integration, and comprehensive reporting.</p>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-number">80%</div>
+                            <div class="metric-label">Manual Testing Reduced</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-number">82+</div>
+                            <div class="metric-label">Automated Tests</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-number">12</div>
+                            <div class="metric-label">Testing Categories</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-number">24/7</div>
+                            <div class="metric-label">CI/CD Pipeline</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & CERTIFICATIONS -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title center">🎓 Education & Certifications</h2>
+                <div class="three-col-grid">
+                    <div class="card">
+                        <div class="card-icon">🎓</div>
+                        <h3>MBA</h3>
+                        <p>Master of Business Administration</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🏆</div>
+                        <h3>MCSD</h3>
+                        <p>Microsoft Certified Solution Developer</p>
+                        <small>Microsoft</small>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🏆</div>
+                        <h3>MCP</h3>
+                        <p>Microsoft Certified Professional</p>
+                        <small>Microsoft</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="section section-dark">
+            <div class="container">
+                <h2 class="section-title center">🛠️ Technical Skills</h2>
+                <div class="two-col-grid">
+                    <div class="card">
+                        <h3>Tech Stack</h3>
+                        <div class="tags">
+                            <span class="tag">🐍 Python</span>
+                            <span class="tag">🌐 Selenium WebDriver</span>
+                            <span class="tag">🧪 Pytest</span>
+                            <span class="tag">📊 Allure Reports</span>
+                            <span class="tag">⚙️ GitHub Actions</span>
+                            <span class="tag">🔄 CI/CD</span>
+                            <span class="tag">🔒 OWASP</span>
+                            <span class="tag">📱 Responsive Testing</span>
+                            <span class="tag">🔍 SEO Testing</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Testing Expertise</h3>
+                        <div class="checklist">
+                            <div class="check-item">✅ Functional Testing</div>
+                            <div class="check-item">✅ Regression Testing</div>
+                            <div class="check-item">✅ Cross-Browser Testing</div>
+                            <div class="check-item">✅ Responsive/Mobile Testing</div>
+                            <div class="check-item">✅ Performance Testing</div>
+                            <div class="check-item">✅ SEO Validation</div>
+                            <div class="check-item">✅ SSL Security Testing</div>
+                            <div class="check-item">✅ Form Validation</div>
+                            <div class="check-item">✅ Smoke & Sanity Testing</div>
+                            <div class="check-item">✅ Broken Link Detection</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHAT MAKES ME DIFFERENT -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title center">⭐ What Makes Me Different</h2>
+                <div class="strengths-grid">
+                    <div class="strength-card">
+                        <div class="strength-icon">🛡️</div>
+                        <h4>Prevention Over Detection</h4>
+                        <p>I don't just find bugs — I prevent them</p>
+                    </div>
+                    <div class="strength-card">
+                        <div class="strength-icon">🤖</div>
+                        <h4>Full Automation</h4>
+                        <p>I build frameworks that run automatically every day</p>
+                    </div>
+                    <div class="strength-card">
+                        <div class="strength-icon">📊</div>
+                        <h4>Clear Reporting</h4>
+                        <p>I deliver reports that stakeholders understand</p>
+                    </div>
+                    <div class="strength-card">
+                        <div class="strength-icon">🎯</div>
+                        <h4>Business Impact</h4>
+                        <p>I focus on real business impact, not just test counts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="section section-dark">
+            <div class="container">
+                <h2 class="section-title center">🚀 Projects</h2>
+                <div class="project-card">
+                    <div class="project-badge no-print">Featured Project</div>
+                    <h3>🏥 SleepApneaBD.com — QA Automation Suite</h3>
+                    <p class="project-desc">Built a complete QA automation suite from scratch for a healthcare website</p>
+                    <div class="project-highlights">
+                        <div class="highlight">✔️ 82+ automated tests across 12 categories</div>
+                        <div class="highlight">✔️ Daily automated execution via GitHub Actions</div>
+                        <div class="highlight">✔️ Live Allure Dashboard with pass/fail analysis</div>
+                        <div class="highlight">✔️ Automated screenshot capture on failures</div>
+                    </div>
+                    <div class="project-links no-print">
+                        <a href="https://rahman-pro.github.io/sleepapnea-qatest/" target="_blank" class="btn btn-primary">📈 Live Report</a>
+                        <a href="https://github.com/Rahman-Pro/sleepapnea-qatest" target="_blank" class="btn btn-secondary">💻 Source Code</a>
+                    </div>
+                    <div class="print-only print-links">
+                        <p>📈 Live Report: rahman-pro.github.io/sleepapnea-qatest/</p>
+                        <p>💻 Source Code: github.com/Rahman-Pro/sleepapnea-qatest</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="contact-card">
+                    <h2>📩 Let's Work Together</h2>
+                    <p>Open to freelance projects & full-time QA roles worldwide!</p>
+                    <div class="contact-buttons no-print">
+                        <a href="mailto:rahman.arpro@gmail.com" class="btn btn-primary btn-lg">📧 Email Me</a>
+                        <a href="https://github.com/Rahman-Pro" target="_blank" class="btn btn-secondary btn-lg">💻 GitHub Profile</a>
+                    </div>
+                    <div class="contact-info">
+                        <p>📍 Dhaka, Bangladesh</p>
+                        <p>📧 rahman.arpro@gmail.com</p>
+                        <p>💻 github.com/Rahman-Pro</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Download Bar -->
+    <div class="download-bar no-print">
+        <div class="download-bar-container">
+            <span class="download-bar-text">📄 Atiqur Rahman - QA Automation Engineer</span>
+            <div class="download-bar-actions">
+                <button onclick="handlePrint()" class="dl-btn dl-print">🖨️ Print</button>
+                <button onclick="handleDownloadPDF()" class="dl-btn dl-pdf">📄 Save PDF</button>
+                <button onclick="handleCopyLink()" class="dl-btn dl-link">🔗 Copy Link</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Atiqur Rahman. All rights reserved.</p>
+        <p>Built with ❤️ | QA Automation Engineer</p>
+    </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
